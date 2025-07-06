@@ -29,4 +29,4 @@ Writing sqlite clone from scratch in C.
 - `README.md` - this file.
 
 ## Architecture
-![Any text here](img/arch1.gif)
+![sqlite architecture ](img/arch1.gif)
