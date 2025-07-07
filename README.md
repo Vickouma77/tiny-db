@@ -21,11 +21,11 @@ Writing sqlite clone from scratch in C.
 - `Utilities` - various utility functions and classes.
 - `Tests` - unit tests for the database.
 
+## Architecture
+![sqlite architecture ](assets/images/arch1.gif)
+
 ## Build
 - `Makefile` - the build system for the project.
 
 ## Documentation
 - `README.md` - this file.
-
-## Architecture
-![sqlite architecture ](assets/images/arch1.gif)
