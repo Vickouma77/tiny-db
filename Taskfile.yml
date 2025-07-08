@@ -1,0 +1,27 @@
+version: '3'
+
+vars:
+  CFLAGS: "-Wall -Wextra -Werror -pedantic"
+
+tasks:
+  build:
+    desc: "Compile a specific .c file into an executable"
+    requires:
+      vars: ["FILE"]
+    cmds:
+      - |
+        OUTPUT={{ .FILE | trimSuffix ".c" }}
+        gcc {{.CFLAGS}} -o $OUTPUT {{.FILE}}
+    silent: false
+
+  build-all:
+    desc: "Compile all .c files into a single executable (e.g., a.out)"
+    cmds:
+      - gcc {{.CFLAGS}} *.c
+    silent: false
+
+  clean:
+    desc: "Remove compiled binaries"
+    cmds:
+      - rm -f *.o *.out *.exe a.out
+    silent: false
