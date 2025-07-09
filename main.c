@@ -1,31 +1,27 @@
 /**
-*  Infinite loop that prints the prompt,
-*  gets a line of input, then processes the 
-*  line of input
+* A simple command-line interface for a database-like application.
 */
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct {
-    char* buffer;
-    size_t buffer_length;
-    ssize_t input_length;
-}InputBuffer;
+  char* buffer;
+  size_t buffer_length;
+  ssize_t input_length;
+} InputBuffer;
 
 InputBuffer* new_input_buffer() {
-    InputBuffer* input_buffer = malloc(sizeof(InputBuffer));
-    input_buffer->buffer = NULL;
-    input_buffer->buffer_length = 0;
-    input_buffer->input_length = 0;
+  InputBuffer* input_buffer = malloc(sizeof(InputBuffer));
+  input_buffer->buffer = NULL;
+  input_buffer->buffer_length = 0;
+  input_buffer->input_length = 0;
 
-    return input_buffer;
+  return input_buffer;
 }
 
-void print_prompt() { printf("tiny-db> "); }
-
-ssize_t getline(char **lineptr, size_t *n, FILE *stream);
+void print_prompt() { printf("db > "); }
 
 void read_input(InputBuffer* input_buffer) {
   ssize_t bytes_read =
@@ -46,17 +42,17 @@ void close_input_buffer(InputBuffer* input_buffer) {
     free(input_buffer);
 }
 
-int main(int argc, char *argv[]) {
-    InputBuffer* input_buffer = new_input_buffer();
-    while (true) {
-        print_prompt();
-        read_input(input_buffer);
+int main(int argc, char* argv[]) {
+  InputBuffer* input_buffer = new_input_buffer();
+  while (true) {
+    print_prompt();
+    read_input(input_buffer);
 
-        if (strcmp(input_buffer->buffer, ".exit") == 0) {
-            close_input_buffer(input_buffer);
-            exit(EXIT_SUCCESS);
-        } else {
-            printf("Unrecognized command '%s'\n", input_buffer->buffer);
-        }
+    if (strcmp(input_buffer->buffer, ".exit") == 0) {
+      close_input_buffer(input_buffer);
+      exit(EXIT_SUCCESS);
+    } else {
+      printf("Unrecognized command '%s'.\n", input_buffer->buffer);
     }
+  }
 }
